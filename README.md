@@ -20,12 +20,12 @@ Basically what we are doing here is invoking Keycloaks OpenID Connect token endp
 Take a look at the result by running:
 echo $RESULT
 
-(For public client's, the POST invocation requires form parameters that contain the username, credentials, and client_id of your application. For example:
+For public client's, the POST invocation requires form parameters that contain the username, credentials, and client_id of your application. For example:
 
     POST /auth/realms/demo/protocol/openid-connect/token
     Content-Type: application/x-www-form-urlencoded
 
-    username=bburke&password=geheim&client_id=curl&grant_type=password)
+    username=bburke&password=geheim&client_id=curl&grant_type=password
 
 2.The result is a JSON document that contains a number of properties. There's only one we need for now though so we need to parse this output to retrieve only the value we want. To do this run:
 
@@ -36,4 +36,6 @@ TOKEN=`echo $RESULT | sed 's/.*access_token":"//g' | sed 's/".*//g'`
 This command uses sed to strip out everything before and after the value of the access token property.
 
 3.Now that we have the token we can invoke the secured service. To do this run:
+```bash
 curl https://squirrel-staging.wpic-tools.com/rest/tasks -H "Authorization: bearer $TOKEN"
+```
