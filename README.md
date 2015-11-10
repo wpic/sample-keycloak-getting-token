@@ -29,7 +29,7 @@ For public client's, the POST invocation requires form parameters that contain t
 
 2. The result is a JSON document that contains a number of properties. There's only one we need for now though so we need to parse this output to retrieve only the value we want. To do this run:
 
-TOKEN=`echo $RESULT | sed 's/.*access_token":"//g' | sed 's/".*//g'`
+    TOKEN=`echo $RESULT | sed 's/.*access_token":"//g' | sed 's/".*//g'`
 
 This command uses sed to strip out everything before and after the value of the access token property.
 
